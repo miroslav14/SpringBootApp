@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<h1>Welcome all.</h1>
+	<p><h5>This is Spring Boot application which is enabling 
+		user to upload specific Json file and select the 
+		database type where the processed data are going 
+		to be stored. Data are going to be overridden every 
+		time the user will proceed with new upload.</h5></p>
+	
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h2>Upload File</h2>
+                <p th:text="${content}" th:if="${content ne null}" class="alert alert-primary"></p>
+                <form method="post" th:action="@{/process}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="file" name="file" class="form-control-file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Process uploaded file</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
