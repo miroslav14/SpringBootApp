@@ -21,12 +21,29 @@ import spring_boot.json_processor.mutli_layer_tech.model.CVE_Item;
 public class FileProcessingFacadeImplementation implements FileProcessingFacadeInterface {
 
 	@Override
-	public List<CVE_Item> getCVE_Items() {
+	public List<CVE_Item> getCVE_Items_for_Web() {
 		return new ArrayList<CVE_Item>();
 	}
 
 	@Override
-	public boolean saveCVE_Items(MultipartFile file, String db_name) {
+	public boolean saveCVE_Items_from_Web(MultipartFile file, String db_name) {
+		return save_Items_from_Web(file, db_name);
+	}
+
+	@Override
+	public List<CVE_Item> getCVE_Items_for_REST_API() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	@Override
+	public boolean saveCVE_Items_from_REST_API(JSONObject jsonfile, String db_name) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+
+
+
+	private boolean save_Items_from_Web(MultipartFile file, String db_name) {
 		List<CVE_Item> listOfCVE_items = new ArrayList<>();
 		try {
 			byte[] bytes = file.getBytes();
@@ -47,5 +64,5 @@ public class FileProcessingFacadeImplementation implements FileProcessingFacadeI
 			return false;
 		}
 	}
-
+	
 }
