@@ -29,8 +29,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory",
-	basePackages = {"spring_boot.json_processor.mutli_layer_tech.d_dao.h2Repository.daoInterfaces"})
+@EnableJpaRepositories(entityManagerFactoryRef = "h2_entityManagerFactory",
+	basePackages = {"spring_boot.json_processor.mutli_layer_tech.d_dao.h2Repository.daoInterfaces"},
+	transactionManagerRef="h2_localContainerTransactionManager")
 public class H2DataSourceConfig {
 
 	@Primary
@@ -41,7 +42,7 @@ public class H2DataSourceConfig {
 	}
         
 	@Primary
-	@Bean("bean_h2_localContainerEntityManagerFactoryBean")
+	@Bean("h2_entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean_H2(
 		EntityManagerFactoryBuilder builder_entityManagerFactory,
 		@Qualifier("bean_h2_datasource") DataSource h2_Datasource) {
@@ -57,9 +58,9 @@ public class H2DataSourceConfig {
 	}
 
 	@Primary
-	@Bean("bean_h2_transactionManagement")
+	@Bean("h2_localContainerTransactionManager")
 	public PlatformTransactionManager getTransactionManagement_H2(
-	       @Qualifier("bean_h2_localContainerEntityManagerFactoryBean") EntityManagerFactory emFactory){
+	       @Qualifier("h2_entityManagerFactory") EntityManagerFactory emFactory){
 	    return new JpaTransactionManager(emFactory);
 	}
 
